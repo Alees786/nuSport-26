@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NUSPORT '26 – Website Closed</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1b5c;
+    --navy-deep: #080f36;
+    --ruby: #e53935;
+    --topaz: #1e88e5;
+    --emerald: #43a047;
+    --text: #eef1ff;
+    --muted: #9aa5d6;
+    --glass: rgba(255,255,255,.06);
+    --line: rgba(255,255,255,.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Roboto', system-ui, sans-serif;
+    color: var(--text);
+    background: radial-gradient(1200px 700px at 50% -10%, #1a2a8a 0%, var(--navy) 40%, var(--navy-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px; overflow-x: hidden; position: relative;
+  }
+
+  /* drifting colored glows */
+  .glow { position: fixed; width: 46vmax; height: 46vmax; border-radius: 50%; filter: blur(90px); opacity: .22; pointer-events: none; }
+  .glow.r { background: var(--ruby); left: -15vmax; bottom: -20vmax; animation: drift1 18s ease-in-out infinite alternate; }
+  .glow.t { background: var(--topaz); right: -15vmax; top: -20vmax; animation: drift2 22s ease-in-out infinite alternate; }
+  .glow.e { background: var(--emerald); right: -10vmax; bottom: -25vmax; animation: drift1 26s ease-in-out infinite alternate-reverse; }
+  @keyframes drift1 { to { transform: translate(8vmax, -6vmax) scale(1.15); } }
+  @keyframes drift2 { to { transform: translate(-8vmax, 7vmax) scale(1.1); } }
+
+  main { position: relative; z-index: 2; width: min(760px, 100%); text-align: center; }
+
+  .brand { font-family: 'Oswald', sans-serif; letter-spacing: .14em; font-weight: 700; font-size: clamp(1.4rem, 4vw, 2rem); }
+  .school { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+
+  /* orbit emblem */
+  .emblem { position: relative; width: 190px; height: 190px; margin: 34px auto 26px; }
+  .orbit { position: absolute; inset: 0; border-radius: 50%; border: 1px dashed var(--line); animation: spin 14s linear infinite; }
+  .orbit i { position: absolute; width: 18px; height: 18px; border-radius: 50%; left: 50%; top: 50%; margin: -9px; }
+  .orbit i:nth-child(1) { background: var(--ruby);    box-shadow: 0 0 18px var(--ruby);    transform: rotate(0deg)   translate(95px); }
+  .orbit i:nth-child(2) { background: var(--topaz);   box-shadow: 0 0 18px var(--topaz);   transform: rotate(120deg) translate(95px); }
+  .orbit i:nth-child(3) { background: var(--emerald); box-shadow: 0 0 18px var(--emerald); transform: rotate(240deg) translate(95px); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .lock { position: absolute; inset: 38px; border-radius: 50%; background: var(--glass); border: 1px solid var(--line);
+          backdrop-filter: blur(6px); display: grid; place-items: center; }
+  .lock svg { width: 54px; height: 54px; overflow: visible; }
+  .shackle { transform-origin: 50% 100%; animation: latch 5s ease-in-out infinite; }
+  @keyframes latch {
+    0%, 12%  { transform: translateY(-7px); }
+    22%, 100% { transform: translateY(0); }
+  }
+  .lock { animation: thud 5s ease-in-out infinite; }
+  @keyframes thud { 0%, 20% { transform: scale(1); } 23% { transform: scale(.94); } 28%, 100% { transform: scale(1); } }
+
+  h1 { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: clamp(2.2rem, 8vw, 4.2rem); line-height: 1.05; text-transform: uppercase; letter-spacing: .03em; }
+  h1 span { display: block; background: linear-gradient(90deg, var(--ruby), var(--topaz), var(--emerald), var(--ruby)); background-size: 300% 100%;
+            -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 6s linear infinite; }
+  @keyframes shine { to { background-position: 300% 0; } }
+
+  .lead { color: var(--muted); max-width: 46ch; margin: 18px auto 0; line-height: 1.6; }
+
+  /* clock row */
+  .clocks { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: center; margin-top: 36px; }
+  .panel { background: var(--glass); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; backdrop-filter: blur(6px); }
+
+  .analog { width: 132px; height: 132px; padding: 0; border-radius: 50%; position: relative; }
+  .analog svg { width: 100%; height: 100%; display: block; }
+  .hand { transform-origin: 60px 60px; stroke-linecap: round; }
+  .h { stroke: #fff; stroke-width: 3.2; }
+  .m { stroke: #fff; stroke-width: 2.2; }
+  .s { stroke: var(--ruby); stroke-width: 1.2; }
+
+  .digital { min-width: 260px; text-align: left; }
+  .time { font-family: 'Oswald', sans-serif; font-size: clamp(2.2rem, 7vw, 3rem); font-weight: 500; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+  .time .colon { animation: blink 1s steps(1) infinite; }
+  .time small { font-size: .45em; color: var(--muted); margin-left: 6px; }
+  @keyframes blink { 50% { opacity: .2; } }
+  .date { color: var(--muted); margin-top: 2px; }
+
+  .since { margin-top: 18px; }
+  .since .label { color: var(--muted); font-size: .85rem; margin-bottom: 10px; }
+  .counter { display: flex; gap: 10px; justify-content: center; }
+  .counter div { min-width: 66px; background: rgba(0,0,0,.22); border-radius: 12px; padding: 10px 6px; }
+  .counter b { display: block; font-family: 'Oswald', sans-serif; font-size: 1.7rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .counter span { font-size: .72rem; color: var(--muted); }
+
+  .score { display: flex; justify-content: center; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass); font-family: 'Oswald', sans-serif; letter-spacing: .06em; }
+  .chip::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+  .chip.r { color: #ff6b68; } .chip.t { color: #5aa9f0; } .chip.e { color: #6fc274; }
+  .chip em { font-style: normal; color: var(--text); }
+
+  footer { margin-top: 34px; color: var(--muted); font-size: .85rem; }
+
+  @media (max-width: 520px) {
+    .digital { text-align: center; min-width: 0; width: 100%; }
+    .counter div { min-width: 58px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="glow r"></div><div class="glow t"></div><div class="glow e"></div>
+
+  <main>
+    <div class="brand">NUSPORT '26</div>
+    <div class="school">Nusrath Secondary School · Randathani</div>
+
+    <div class="emblem" aria-hidden="true">
+      <div class="orbit"><i></i><i></i><i></i></div>
+      <div class="lock">
+        <svg viewBox="0 0 54 54">
+          <path class="shackle" d="M16 25V18a11 11 0 0 1 22 0v7" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+          <rect x="9" y="24" width="36" height="26" rx="6" fill="#fff"/>
+          <circle cx="27" cy="35" r="3.5" fill="#0f1b5c"/>
+          <rect x="25.6" y="36" width="2.8" height="8" rx="1.4" fill="#0f1b5c"/>
+        </svg>
+      </div>
+    </div>
+
+    <h1><span>Website Closed</span></h1>
+    <p class="lead">This website has expired. The sports meet has concluded and the live scoreboard is no longer available. Thank you to every house, athlete and supporter for a great NUSPORT '26.</p>
+
+    <div class="score" aria-label="Final house points">
+      <span class="chip r">Ruby <em>298</em></span>
+      <span class="chip t">Topaz <em>268</em></span>
+      <span class="chip e">Emerald <em>264</em></span>
+    </div>
+
+    <div class="clocks">
+      <div class="panel analog" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+          <g id="ticks" stroke="rgba(255,255,255,.5)" stroke-width="1.5"></g>
+          <line class="hand h" id="hh" x1="60" y1="60" x2="60" y2="35"/>
+          <line class="hand m" id="mh" x1="60" y1="60" x2="60" y2="22"/>
+          <line class="hand s" id="sh" x1="60" y1="70" x2="60" y2="16"/>
+          <circle cx="60" cy="60" r="3.5" fill="#e53935"/>
+        </svg>
+      </div>
+      <div class="panel digital">
+        <div class="time" id="time">00<span class="colon">:</span>00<span class="colon">:</span>00<small>AM</small></div>
+        <div class="date" id="date"></div>
+      </div>
+    </div>
+
+    <div class="since">
+      <div class="label">Closed for</div>
+      <div class="counter" id="counter">
+        <div><b id="cd">0</b><span>days</span></div>
+        <div><b id="ch">00</b><span>hours</span></div>
+        <div><b id="cm">00</b><span>minutes</span></div>
+        <div><b id="cs">00</b><span>seconds</span></div>
+      </div>
+    </div>
+
+    <footer>© 2026 NUSPORT · Nusrath Secondary School, Randathani</footer>
+  </main>
+
+<script>
+  // ⚙️ Set the date/time the site was closed (local time)
+  const CLOSED_AT = new Date('2026-10-03T00:00:00');
+
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2, '0');
+
+  // clock ticks
+  const ticks = $('ticks');
+  for (let i = 0; i < 12; i++) {
+    const a = i * 30 * Math.PI / 180, long = i % 3 === 0;
+    const r1 = long ? 46 : 49, r2 = 53;
+    ticks.insertAdjacentHTML('beforeend',
+      `<line x1="${60 + r1 * Math.sin(a)}" y1="${60 - r1 * Math.cos(a)}" x2="${60 + r2 * Math.sin(a)}" y2="${60 - r2 * Math.cos(a)}"/>`);
+  }
+
+  function tick() {
+    const now = new Date();
+    let h = now.getHours(), m = now.getMinutes(), s = now.getSeconds(), ms = now.getMilliseconds();
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12 = h % 12 || 12;
+
+    $('time').innerHTML = `${pad(h12)}<span class="colon">:</span>${pad(m)}<span class="colon">:</span>${pad(s)}<small>${ampm}</small>`;
+    $('date').textContent = now.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+    const sec = s + ms / 1000, min = m + sec / 60, hr = (h % 12) + min / 60;
+    $('sh').style.transform = `rotate(${sec * 6}deg)`;
+    $('mh').style.transform = `rotate(${min * 6}deg)`;
+    $('hh').style.transform = `rotate(${hr * 30}deg)`;
+
+    let diff = Math.max(0, Math.floor((now - CLOSED_AT) / 1000));
+    $('cd').textContent = Math.floor(diff / 86400);
+    $('ch').textContent = pad(Math.floor(diff % 86400 / 3600));
+    $('cm').textContent = pad(Math.floor(diff % 3600 / 60));
+    $('cs').textContent = pad(diff % 60);
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+</script>
+</body>
+</html>
